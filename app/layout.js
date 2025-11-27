@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Torlak Akademi Yazılım Kursları",
+  title: "CodeG ACADEMY Yazılım Kursları",
   description: "Java, Python, PLC, Arduino, Web/Mobil Test otomasyon eğitimleri.",
 };
 
