@@ -103,7 +103,7 @@ const COURSES = [
   },
 ];
 
-export default function TorlakAkademi() {
+export default function CodeGAcademy() {
   const [selected, setSelected] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [status, setStatus] = useState("");
@@ -161,33 +161,33 @@ export default function TorlakAkademi() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-gray-100 via-gray-50 to-gray-200 text-slate-900 py-10 overflow-hidden font-sans">
+    <div className="relative min-h-screen bg-gradient-to-b from-gray-100 via-gray-50 to-gray-200 text-slate-900 py-6 md:py-10 overflow-hidden font-sans pb-[env(safe-area-inset-bottom)]">
       {/* Ana içerik */}
       <div className={`transition-all duration-500 ${selected ? "filter blur-md scale-[0.98]" : ""}`}>
-        <div className="max-w-7xl mx-auto px-6 relative">
-          <h1 className="text-4xl font-bold mb-8 text-center text-slate-800">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 relative">
+          <h1 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-center text-slate-800">
             CodeG ACADEMY Yazılım Kursları
           </h1>
 
           {/* Kurs Kartları */}
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 justify-items-center">
             {COURSES.map((c) => (
               <div
                 key={c.id}
                 onClick={() => setSelected(c)}
-                className="group relative bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden w-64 h-64 flex flex-col justify-end items-center cursor-pointer transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+                className="group relative bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden w-full max-w-[260px] h-52 md:h-64 flex flex-col justify-end items-center cursor-pointer transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
               >
                 <img
                   src={c.image}
                   alt={c.title}
-                  className="absolute top-0 left-0 w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-110"
+                  className="absolute top-0 left-0 w-full h-full object-contain p-3 md:p-4 transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="relative z-10 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <button className="bg-indigo-600 px-4 py-2 rounded-lg font-semibold text-white hover:bg-indigo-700 shadow">
+                  <button className="bg-indigo-600 px-3 md:px-4 py-1.5 md:py-2 rounded-lg font-semibold text-white hover:bg-indigo-700 shadow text-sm md:text-base">
                     Detayları Gör
                   </button>
                 </div>
-                <div className="bg-gray-50 w-full text-center py-2 font-semibold text-slate-800 z-20">
+                <div className="bg-gray-50 w-full text-center py-1.5 md:py-2 font-semibold text-slate-800 z-20 text-xs md:text-sm">
                   {c.title}
                 </div>
               </div>
@@ -195,36 +195,52 @@ export default function TorlakAkademi() {
           </div>
 
           {/* Eğitmenler + İletişim */}
-          <section className="relative mt-12 text-center">
-            <h2 className="text-2xl font-bold text-slate-800">Eğitmenler</h2>
+          <section className="relative mt-10 md:mt-12 text-center">
+            <h2 className="text-xl md:text-2xl font-bold text-slate-800">Eğitmenler</h2>
 
-            <div className="relative mt-3 inline-block">
-              {/* Büyük buton için sağ boşluk fazla */}
-              <div className="space-y-1 pr-72">
-                <p className="text-indigo-700 font-semibold text-lg">
+            <div className="relative mt-3 inline-flex md:inline-block items-center md:items-start flex-col md:flex-none">
+              {/* Mobil: sağ padding yok, Desktop: büyük buton için sağ boşluk */}
+              <div className="space-y-1 md:pr-72">
+                <p className="text-indigo-700 font-semibold text-base md:text-lg">
                   Elektrik Elektronik Mühendisi Enes Torlak
                 </p>
-                <p className="text-indigo-700 font-semibold text-lg">
+                <p className="text-indigo-700 font-semibold text-base md:text-lg">
                   Yazılım Mühendisi Ahmet Naim Torlak
                 </p>
               </div>
 
-              {/* BÜYÜK sağ buton */}
+              {/* İletişim butonu — Desktop sağa hizalı, Mobilde altta & ortada büyük */}
               <button
                 onClick={() => setShowModal(true)}
                 aria-label="İletişime Geç"
-                className="absolute right-0 top-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-white border border-indigo-200 shadow-2xl hover:bg-indigo-50 focus:outline-none focus:ring-4 focus:ring-indigo-300 flex items-center justify-center"
+                className="
+                  md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2
+                  mt-4 md:mt-0
+                  w-20 h-20 md:w-24 md:h-24
+                  rounded-full bg-white border border-indigo-200 shadow-2xl hover:bg-indigo-50
+                  focus:outline-none focus:ring-4 focus:ring-indigo-300
+                  flex items-center justify-center self-center md:self-auto
+                "
               >
                 <img
                   src="/images/contact.png"
                   alt="İletişime Geç"
-                  className="h-16 w-auto object-contain"
+                  className="h-12 w-auto md:h-16 object-contain"
                 />
               </button>
             </div>
           </section>
         </div>
       </div>
+
+      {/* (Opsiyonel) Mobil uçan İletişim butonu — sadece küçük ekranlarda */}
+      <button
+        onClick={() => setShowModal(true)}
+        aria-label="İletişime Geç (Mobil FAB)"
+        className="md:hidden fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-indigo-600 shadow-xl hover:bg-indigo-700 active:scale-95 transition flex items-center justify-center"
+      >
+        <img src="/images/contact.png" alt="İletişim" className="h-8 w-auto invert-0" />
+      </button>
 
       {/* Kurs Detay Modal */}
       {selected && (
@@ -234,43 +250,58 @@ export default function TorlakAkademi() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white rounded-2xl shadow-2xl p-8 w-[90%] max-w-3xl border border-indigo-100 relative animate-slideFadeIn"
+            className="
+              bg-white rounded-2xl shadow-2xl
+              w-[92%] md:w-[90%] max-w-3xl
+              border border-indigo-100 relative animate-slideFadeIn
+              max-h-[85vh] overflow-y-auto
+            "
           >
             <button
               onClick={() => setSelected(null)}
-              className="absolute top-3 right-4 text-slate-500 text-2xl hover:text-slate-700"
+              className="absolute top-2.5 right-3 text-slate-500 text-2xl hover:text-slate-700"
             >
               ✕
             </button>
 
-            <div className="flex justify-center mb-6">
-              <img
-                src={selected?.image}
-                alt={selected?.title}
-                className="w-full max-w-lg h-[300px] object-contain rounded-lg shadow-lg bg-white p-3"
-              />
+            <div className="p-4 md:p-8">
+              <div className="flex justify-center mb-4 md:mb-6">
+                <img
+                  src={selected?.image}
+                  alt={selected?.title}
+                  className="w-full max-w-lg h-[220px] md:h-[300px] object-contain rounded-lg shadow-lg bg-white p-2 md:p-3"
+                />
+              </div>
+
+              <h1 className="text-2xl md:text-3xl font-bold text-indigo-700 mb-3 text-center">
+                {selected.title}
+              </h1>
+              <p className="text-slate-700 text-sm md:text-base text-center mb-4">
+                {selected.content}
+              </p>
+
+              <div className="bg-indigo-50 p-3 md:p-4 rounded-lg mb-4 md:mb-6">
+                <h3 className="text-indigo-700 font-semibold mb-2 text-center">
+                  Örnek Projeler:
+                </h3>
+                <ul className="list-none text-slate-700 space-y-1 text-center text-sm md:text-base">
+                  {selected.projects.map((proj, i) => (
+                    <li key={i}>{proj}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <p className="text-xs text-center text-slate-500 mb-3 md:mb-4">
+                🎓 Katılım Sertifikası verilecektir.
+              </p>
+
+              <button
+                onClick={() => setShowModal(true)}
+                className="w-full bg-indigo-600 text-white rounded-lg py-2.5 md:py-3 font-semibold hover:bg-indigo-700 transition"
+              >
+                📩 İletişime Geç
+              </button>
             </div>
-
-            <h1 className="text-3xl font-bold text-indigo-700 mb-3 text-center">{selected.title}</h1>
-            <p className="text-slate-700 text-center mb-4">{selected.content}</p>
-
-            <div className="bg-indigo-50 p-4 rounded-lg mb-6">
-              <h3 className="text-indigo-700 font-semibold mb-2 text-center">Örnek Projeler:</h3>
-              <ul className="list-none text-slate-700 space-y-1 text-center">
-                {selected.projects.map((proj, i) => (
-                  <li key={i}>{proj}</li>
-                ))}
-              </ul>
-            </div>
-
-            <p className="text-xs text-center text-slate-500 mb-4">🎓 Katılım Sertifikası verilecektir.</p>
-
-            <button
-              onClick={() => setShowModal(true)}
-              className="w-full bg-indigo-600 text-white rounded-lg py-3 font-semibold hover:bg-indigo-700 transition"
-            >
-              📩 İletişime Geç
-            </button>
           </div>
         </div>
       )}
@@ -282,16 +313,22 @@ export default function TorlakAkademi() {
           onClick={() => setShowModal(false)}
         >
           <div
-            className="bg-white rounded-xl shadow-2xl p-6 w-96 animate-slideFadeIn"
+            className="
+              bg-white rounded-xl shadow-2xl w-[92%] max-w-md animate-slideFadeIn
+              max-h-[85vh] overflow-y-auto
+              p-4 md:p-6
+            "
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-lg font-semibold text-indigo-700 mb-2 text-center">İletişim</h2>
+            <h2 className="text-lg md:text-xl font-semibold text-indigo-700 mb-2 text-center">
+              İletişim
+            </h2>
 
-            <p className="text-center text-slate-500 text-sm mb-3">
+            <p className="text-center text-slate-500 text-xs md:text-sm mb-3">
               Kurs: <span className="font-medium">{selected ? selected.title : "Belirtilmedi"}</span>
             </p>
 
-            <div className="text-center text-slate-700 mb-4 space-y-1">
+            <div className="text-center text-slate-700 mb-4 space-y-1 text-sm md:text-base">
               <p>📞 0543 934 0560</p>
               <p>📧 engineer.enestorlak@gmail.com</p>
             </div>
@@ -313,17 +350,19 @@ export default function TorlakAkademi() {
               <textarea
                 name="message"
                 placeholder="Mesajınız"
-                rows="3"
+                rows={3}
                 required
                 className="w-full rounded-lg border border-indigo-200 px-3 py-2 text-slate-900"
-              ></textarea>
+              />
               <button
                 type="submit"
-                className="w-full bg-indigo-600 text-white rounded-lg py-2 font-semibold hover:bg-indigo-700"
+                className="w-full bg-indigo-600 text-white rounded-lg py-2.5 font-semibold hover:bg-indigo-700"
               >
                 Mesaj Gönder
               </button>
-              {status && <p className="text-center text-indigo-700 font-medium mt-2">{status}</p>}
+              {status && (
+                <p className="text-center text-indigo-700 font-medium mt-2">{status}</p>
+              )}
             </form>
 
             <button
